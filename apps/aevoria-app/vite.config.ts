@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@aevoria/ui': resolve(__dirname, '../../packages/aev-ui/src'),
+      '@aevoria/ui': resolve(__dirname, '../../packages/aev-ui/dist'),
     },
   },
 })
