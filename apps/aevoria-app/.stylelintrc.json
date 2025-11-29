@@ -1,0 +1,15 @@
+{
+  "extends": ["stylelint-config-standard-scss"],
+  "plugins": ["./stylelint-custom-rules.cjs"],
+  "rules": {
+    "selector-class-pattern": null,
+    "scss/at-import-partial-extension": null,
+    "scss/at-rule-no-unknown": null,
+    "custom/aevoria-rules": [true, {
+      "enforcePxToRem": true,
+      "enforceColorVar": true,
+      "enforceFontFamily": true
+    }]
+  }
+}
+

@@ -1,0 +1,136 @@
+@use "sass:color";
+@use "sass:math";
+
+// Colors
+$color-white: #fff;
+$color-background: #0f0f1a;
+$color-background-light: #1a1a2e;
+$color-gray: #B0B0B0;
+$color-gray-light: #E0E0E0;
+$color-gray-dark: #333;
+$color-black: #000;
+$color-blue: #0D6EFD;
+$color-blue-hover: #0b5ed7;
+$color-blue-light: #3d8bfd;
+$color-blue-dark: #0a58ca;
+$color-primary: #0D6EFD;
+$color-secondary: #1a1a2e;
+// Status colors
+$color-success: #22c55e;
+$color-warning: #f59e0b;
+$color-error: #ef4444;
+$color-info: #0D6EFD;
+
+$card-gradient: linear-gradient(135deg, rgb(13 110 253 / 8%) 0%, rgb(0 0 0 / 60%) 50%, rgb(13 110 253 / 8%) 100%);
+$card-gradient-hover: linear-gradient(135deg, rgb(13 110 253 / 12%) 0%, rgb(0 0 0 / 65%) 50%, rgb(13 110 253 / 12%) 100%);
+
+$base-font-size: 10;
+
+// rem vers px
+@function rem-calc($px) {
+  @return math.div($px, $base-font-size) * 1rem;
+}
+
+@function lighten($color, $amount) {
+  @return color.scale($color, $lightness: $amount);
+}
+
+
+html, body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: rem-calc(42);
+  font-weight: 600;
+  color: $color-white;
+}
+
+p,
+span,
+label,
+td {
+  font-size: rem-calc(16);
+  color: $color-white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.instrument-sans {
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+.blue {
+  color: $color-blue;
+}
+
+body {
+  background-color: $color-background;
+  color: $color-white;
+}
+
+.modal-actions {
+  margin-top: rem-calc(20);
+}
+
+.z10000 {
+  z-index: 10000;
+}
+
+.toast-container {
+  position: fixed;
+  top: rem-calc(20);
+  right: rem-calc(20);
+  z-index: 100000 !important;
+  display: flex;
+  flex-direction: column;
+  gap: rem-calc(15);
+}
+
+.tdnone {
+  text-decoration: none !important;
+}
+
+::-webkit-scrollbar {
+  width: rem-calc(10);
+  background: $color-background;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, $color-blue 0%, $color-blue-light 100%);
+  border-radius: rem-calc(8);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, lighten($color-blue, 10%) 0%, lighten($color-blue-light, 10%) 100%);
+}
+
+::-webkit-scrollbar-corner {
+  background: $color-background;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $color-gray $color-background;
+}
+
+html, body, #root {
+  overflow-x: hidden !important;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  html, body, #root {
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden !important;
+  }
+}
+

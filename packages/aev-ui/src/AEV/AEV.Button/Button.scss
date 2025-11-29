@@ -1,0 +1,82 @@
+@use '../../global.scss' as *;
+
+.aev-button {
+  font-weight: 500;
+  border-radius: $radius-lg;
+  transition: $transition;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.5);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  // Variants
+  &--primary {
+    background-color: $blue;
+    color: $text-white;
+
+    &:hover:not(:disabled) {
+      background-color: $blue-hover;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.5);
+    }
+  }
+
+  &--secondary {
+    background-color: $secondary;
+    color: $text-white;
+
+    &:hover:not(:disabled) {
+      background-color: $secondary-hover;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(75, 85, 99, 0.5);
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    color: $text-primary;
+    border: 2px solid $outline-border;
+
+    &:hover:not(:disabled) {
+      background-color: $outline-hover;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(209, 213, 219, 0.5);
+    }
+  }
+
+  // Sizes
+  &--sm {
+    padding: $spacing-xs $spacing-md;
+    font-size: 0.875rem; // 14px
+  }
+
+  &--md {
+    padding: $spacing-sm $spacing-md;
+    font-size: 1rem; // 16px
+  }
+
+  &--lg {
+    padding: $spacing-md $spacing-lg;
+    font-size: 1.125rem; // 18px
+  }
+}
+
