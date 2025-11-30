@@ -57,9 +57,10 @@ const getRules = () => {
 }
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'eslint.config.js', '*.config.js', '*.config.ts', 'vite.config.ts']),
   {
     files: ['**/*.{ts,tsx}'],
+    ignores: ['eslint.config.js', '*.config.js', '*.config.ts', 'vite.config.ts'],
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
@@ -75,5 +76,19 @@ export default defineConfig([
       },
     },
     rules: getRules(),
+  },
+  {
+    files: ['eslint.config.js', '*.config.js', '*.config.ts', 'vite.config.ts'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module',
+      },
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+    },
   },
 ])
