@@ -1,0 +1,212 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+env:
+  BRANCH: ${{ github.ref_name }}
+
+jobs:
+  lint-ui:
+    name: Lint UI Package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Lint UI package
+        env:
+          BRANCH: ${{ github.ref_name }}
+          ESLINT_STRICT: ${{ github.ref_name == 'main' && 'true' || 'false' }}
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            npm run lint --workspace=@aevoria/ui -- --max-warnings=0
+          else
+            npm run lint --workspace=@aevoria/ui
+          fi
+
+  build-ui:
+    name: Build UI Package
+    runs-on: ubuntu-latest
+    needs: lint-ui
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build UI package
+        run: npm run build
+
+  lint-app:
+    name: Lint App
+    runs-on: ubuntu-latest
+    needs: build-ui
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build UI package
+        run: npm run build
+      
+      - name: Lint App
+        env:
+          BRANCH: ${{ github.ref_name }}
+          ESLINT_STRICT: ${{ github.ref_name == 'main' && 'true' || 'false' }}
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            npm run lint --workspace=aevoria-app -- --max-warnings=0
+          else
+            npm run lint:app
+          fi
+      
+      - name: Lint SCSS App
+        run: npm run lint:scss:app
+
+  lint-admin:
+    name: Lint Admin
+    runs-on: ubuntu-latest
+    needs: build-ui
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build UI package
+        run: npm run build
+      
+      - name: Lint Admin
+        env:
+          BRANCH: ${{ github.ref_name }}
+          ESLINT_STRICT: ${{ github.ref_name == 'main' && 'true' || 'false' }}
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            npm run lint --workspace=aevoria-admin -- --max-warnings=0
+          else
+            npm run lint:admin
+          fi
+      
+      - name: Lint SCSS Admin
+        run: npm run lint:scss:admin
+
+  lint-back:
+    name: Lint Backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Lint Backend
+        env:
+          BRANCH: ${{ github.ref_name }}
+          ESLINT_STRICT: ${{ github.ref_name == 'main' && 'true' || 'false' }}
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            npm run lint --workspace=back -- --max-warnings=0
+          else
+            npm run lint:back
+          fi
+
+  build-app:
+    name: Build App
+    runs-on: ubuntu-latest
+    needs: [build-ui, lint-app]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build UI package
+        run: npm run build
+      
+      - name: Build App
+        run: npm run build:app
+
+  build-admin:
+    name: Build Admin
+    runs-on: ubuntu-latest
+    needs: [build-ui, lint-admin]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build UI package
+        run: npm run build
+      
+      - name: Build Admin
+        run: npm run build:admin
+
+  build-back:
+    name: Build Backend
+    runs-on: ubuntu-latest
+    needs: lint-back
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build Backend
+        run: npm run build:back
+
