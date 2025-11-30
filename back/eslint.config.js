@@ -1,7 +1,5 @@
 import js from '@eslint/js'
 import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
@@ -57,19 +55,19 @@ const getRules = () => {
 }
 
 export default defineConfig([
-  globalIgnores(['dist', 'eslint.config.js', '*.config.js', '*.config.ts', 'vite.config.ts']),
+  globalIgnores(['dist', 'eslint.config.js', '*.config.js']),
   {
-    files: ['**/*.{ts,tsx}'],
-    ignores: ['eslint.config.js', '*.config.js', '*.config.ts', 'vite.config.ts'],
+    files: ['**/*.{ts,js}'],
+    ignores: ['eslint.config.js', '*.config.js'],
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
     ],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+      ecmaVersion: 2022,
+      globals: {
+        ...globals.node,
+      },
       parserOptions: {
         project: ['./tsconfig.json'],
         tsconfigRootDir: import.meta.dirname,
@@ -78,12 +76,14 @@ export default defineConfig([
     rules: getRules(),
   },
   {
-    files: ['eslint.config.js', '*.config.js', '*.config.ts', 'vite.config.ts'],
+    files: ['eslint.config.js', '*.config.js'],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+      ecmaVersion: 2022,
+      globals: {
+        ...globals.node,
+      },
       parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 2022,
         sourceType: 'module',
       },
     },
@@ -92,3 +92,4 @@ export default defineConfig([
     },
   },
 ])
+

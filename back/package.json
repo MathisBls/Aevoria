@@ -10,9 +10,15 @@
     "start": "node dist/index.js",
     "lint": "eslint ."
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.21.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
     "@types/node": "^24.10.1",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
