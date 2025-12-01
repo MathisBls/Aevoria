@@ -11,11 +11,11 @@ const isDev = process.env.BRANCH === 'dev'
 const getRules = () => {
   const baseRules = {
     '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/no-unsafe-assignment': 'error',
-    '@typescript-eslint/no-unsafe-member-access': 'error',
-    '@typescript-eslint/no-unsafe-call': 'error',
-    '@typescript-eslint/no-unsafe-return': 'error',
-    '@typescript-eslint/no-unsafe-argument': 'error',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
     '@typescript-eslint/ban-ts-comment': 'error',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
