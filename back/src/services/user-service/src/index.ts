@@ -13,6 +13,7 @@ import messageRoutes from './routes/messages/message.routes';
 import notificationRoutes from './routes/notifications/notification.routes';
 import userNotificationRoutes from './routes/notifications/userNotification.routes';
 import newsletterSubscriptionRoutes from './routes/users/newsletterSubscription.routes';
+import authRoutes from './routes/auth.routes';
 
 const app = express();
 const server = createServer(app);
@@ -109,6 +110,7 @@ app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({ status: 'healthy', service: 'user-service', timestamp: new Date().toISOString() });
 });
 
+app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);
 app.use('/api/affiliations', affiliationRoutes);
