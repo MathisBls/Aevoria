@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  user-service:
+    build: ./services/user-service
+    ports:
+      - "3001:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    networks:
+      - aevoria-network
+
+  catalog-service:
+    build: ./services/catalog-service
+    ports:
+      - "3002:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    networks:
+      - aevoria-network
+
+  order-service:
+    build: ./services/order-service
+    ports:
+      - "3003:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    networks:
+      - aevoria-network
+
+  review-service:
+    build: ./services/review-service
+    ports:
+      - "3004:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    networks:
+      - aevoria-network
+
+  blog-service:
+    build: ./services/blog-service
+    ports:
+      - "3005:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    networks:
+      - aevoria-network
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - user-service
+      - catalog-service
+      - order-service
+      - review-service
+      - blog-service
+    networks:
+      - aevoria-network
+
+networks:
+  aevoria-network:
+    driver: bridge

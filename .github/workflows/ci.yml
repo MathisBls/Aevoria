@@ -126,6 +126,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
+      - name: Install backend services dependencies
+        run: npm run install:services
+      
       - name: Lint Backend
         env:
           BRANCH: ${{ github.ref_name }}

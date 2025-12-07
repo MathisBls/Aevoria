@@ -1,0 +1,111 @@
+services:
+  user-service:
+    build:
+      context: ./back/src/services/user-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    networks:
+      - aevoria-network
+    volumes:
+      - ./back/src/services/user-service:/app
+      - /app/node_modules
+    env_file:
+      - ./back/src/.env
+
+  catalog-service:
+    build:
+      context: ./back/src/services/catalog-service
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    networks:
+      - aevoria-network
+    volumes:
+      - ./back/src/services/catalog-service:/app
+      - /app/node_modules
+    env_file:
+      - ./back/src/.env
+
+  order-service:
+    build:
+      context: ./back/src/services/order-service
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    networks:
+      - aevoria-network
+    volumes:
+      - ./back/src/services/order-service:/app
+      - /app/node_modules
+    env_file:
+      - ./back/src/.env
+
+  review-service:
+    build:
+      context: ./back/src/services/review-service
+      dockerfile: Dockerfile
+    ports:
+      - "3004:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    networks:
+      - aevoria-network
+    volumes:
+      - ./back/src/services/review-service:/app
+      - /app/node_modules
+    env_file:
+      - ./back/src/.env
+
+  blog-service:
+    build:
+      context: ./back/src/services/blog-service
+      dockerfile: Dockerfile
+    ports:
+      - "3005:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    networks:
+      - aevoria-network
+    volumes:
+      - ./back/src/services/blog-service:/app
+      - /app/node_modules
+    env_file:
+      - ./back/src/.env
+
+  api-gateway:
+    build:
+      context: ./back/src/api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    depends_on:
+      - user-service
+      - catalog-service
+      - order-service
+      - review-service
+      - blog-service
+    networks:
+      - aevoria-network
+    volumes:
+      - ./back/src/api-gateway:/app
+      - /app/node_modules
+
+networks:
+  aevoria-network:
+    driver: bridge
+

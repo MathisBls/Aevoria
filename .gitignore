@@ -51,9 +51,6 @@ coverage/
 *.temp
 .cache/
 
-# Scripts
-scripts/
-
 # Package manager locks (optional - uncomment if you want to ignore them)
 # package-lock.json
 # yarn.lock
