@@ -1,3 +1,5 @@
+import { SubscriptionType } from './subscriptionType';
+
 export interface User {
   id_user: string;
   first_name: string;
@@ -6,7 +8,7 @@ export interface User {
   email: string;
   password_hash: string;
   password_salt: string;
-  subscription_type: string;
+  subscription_type: SubscriptionType;
   wallet_balance: number;
   language_preference: string | null;
   provider: string;

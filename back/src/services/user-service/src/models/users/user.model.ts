@@ -10,8 +10,16 @@ export const getAllUsers = async (): Promise<User[]> => {
 
 export const getUserById = async (id: string): Promise<User | null> => {
   const [rows] = await pool.execute(
-    'SELECT id_user, first_name, last_name, username, email, subscription_type, wallet_balance, language_preference, provider, created_at, fk_id_role FROM user WHERE id_user = ?',
+    'SELECT id_user, first_name, last_name, username, email, password_hash, password_salt, subscription_type, wallet_balance, language_preference, provider, created_at, fk_id_role FROM user WHERE id_user = ?',
     [id]
+  );
+  return (rows as User[])[0] || null;
+};
+
+export const getUserByEmail = async (email: string): Promise<User | null> => {
+  const [rows] = await pool.execute(
+    'SELECT id_user, first_name, last_name, username, email, password_hash, password_salt, subscription_type, wallet_balance, language_preference, provider, created_at, fk_id_role FROM user WHERE email = ?',
+    [email]
   );
   return (rows as User[])[0] || null;
 };

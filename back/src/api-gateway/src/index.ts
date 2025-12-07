@@ -66,7 +66,7 @@ app.get('/', (_req: Request, res: Response) => {
       swagger: 'http://localhost:3001/api-docs/user-service',
       health: 'http://localhost:3001/health',
       description: 'User management, roles, affiliations, wallet, friends, messages, notifications',
-      endpoints: ['/api/users', '/api/roles', '/api/affiliations', '/api/wallet-transactions', '/api/friends', '/api/messages', '/api/notifications'],
+      endpoints: ['/api/auth', '/api/users', '/api/roles', '/api/affiliations', '/api/wallet-transactions', '/api/friends', '/api/messages', '/api/notifications'],
     },
     {
       name: 'Catalog Service',
@@ -307,6 +307,10 @@ const services = {
 };
 
 // User Service Proxy
+app.use('/api/auth', createProxyMiddleware({
+  target: services.user,
+  changeOrigin: true,
+}));
 app.use('/api/users', createProxyMiddleware({
   target: services.user,
   changeOrigin: true,
