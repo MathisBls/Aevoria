@@ -20,10 +20,19 @@
     "lint": "npm run lint --workspaces",
     "lint:app": "npm run lint --workspace=aevoria-app --fix",
     "lint:admin": "npm run lint --workspace=aevoria-admin --fix",
-    "lint:back": "npm run lint --workspace=back",
+    "lint:back": "node scripts/lint-back.mjs",
+    "install:services": "node scripts/install-back.mjs",
     "lint:scss:app": "npm run lint:scss --workspace=aevoria-app",
     "lint:scss:admin": "npm run lint:scss --workspace=aevoria-admin",
-    "lint:scss:all": "npm run lint:scss:app && npm run lint:scss:admin"
+    "lint:scss:all": "npm run lint:scss:app && npm run lint:scss:admin",
+    "docker:up": "docker compose up",
+    "docker:up:build": "docker compose up --build",
+    "docker:up:detached": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "docker:ps": "docker compose ps",
+    "docker:restart": "docker compose restart",
+    "docker:clean": "docker compose down -v --rmi all --remove-orphans"
   }
 }
 
