@@ -1,0 +1,111 @@
+@import "../../styles/global.scss";
+
+.oxm-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(10 10 20 / 55%);
+  backdrop-filter: blur(rem-calc(8));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: oxm-modal-fadeIn 0.2s ease;
+  z-index: 9999;
+  padding: rem-calc(20);
+
+  &:has(.oxm-modal--blue),
+  &:has(.oxm-modal--large) {
+    padding: rem-calc(10);
+  }
+}
+
+.oxm-modal {
+  border-radius: rem-calc(20);
+  padding: rem-calc(24);
+  width: 90%;
+  max-width: rem-calc(560);
+  min-width: rem-calc(320);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 rem-calc(20) rem-calc(60) rgba(0, 0, 0, 0.5);
+  animation: oxm-modal-scaleIn 0.22s ease-out;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &:not(.oxm-modal--blue) {
+    background: rgb(255 255 255 / 5%);
+    border: 1px solid rgb(255 255 255 / 10%);
+    backdrop-filter: blur(20px);
+  }
+
+  &--small {
+    max-width: rem-calc(400);
+  }
+
+  &--medium {
+    max-width: rem-calc(560);
+  }
+
+  &--large {
+    max-width: 98vw;
+    width: 98vw;
+    height: 95vh;
+    max-height: 95vh;
+    padding: 0;
+    background: rgb(255 255 255 / 5%);
+    border: 1px solid rgb(255 255 255 / 10%);
+    backdrop-filter: blur(20px);
+  }
+
+  &--blue {
+    background: linear-gradient(135deg, #0a1929 0%, #0f2547 50%, #1a3a5a 100%);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    max-width: 98vw;
+    width: 98vw;
+    height: 95vh;
+    max-height: 95vh;
+    padding: 0;
+  }
+
+  h2 {
+    margin-bottom: rem-calc(12);
+    font-family: Outfit, sans-serif;
+    font-size: rem-calc(22);
+    color: $outline-hover;
+  }
+
+  p {
+    color: rgba($outline-hover, 0.72);
+    margin-bottom: rem-calc(20);
+    font-size: rem-calc(15);
+  }
+}
+
+@keyframes oxm-modal-fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes oxm-modal-scaleIn { from { transform: scale(0.98); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+@media (max-width: 768px) {
+  .oxm-modal-backdrop {
+    padding: rem-calc(16);
+  }
+
+  .oxm-modal {
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    max-height: 85vh;
+    padding: rem-calc(20);
+  }
+}
+
+@media (max-width: 480px) {
+  .oxm-modal {
+    padding: rem-calc(16);
+    max-height: 80vh;
+  }
+}

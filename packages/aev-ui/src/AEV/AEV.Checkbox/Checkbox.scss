@@ -1,0 +1,181 @@
+@import "../../styles/global.scss";
+
+.oxm-checkbox-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.oxm-checkbox {
+  display: flex;
+  align-items: center;
+  gap: rem-calc(12);
+  cursor: pointer;
+  user-select: none;
+  font-family: 'Outfit', sans-serif;
+  color: $outline-hover;
+  transition: all 0.3s ease;
+
+  .oxm-checkbox-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .oxm-checkbox-custom {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: rem-calc(2) solid rgba($outline-hover, 0.3);
+    border-radius: rem-calc(4);
+    background: transparent;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+
+    .oxm-checkbox-icon {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: all 0.2s ease;
+      transform: scale(0.8);
+    }
+  }
+
+  &:hover .oxm-checkbox-custom {
+    border-color: rgba($outline-hover, 0.6);
+    background: rgba($outline-hover, 0.05);
+  }
+
+  .oxm-checkbox-input:focus + .oxm-checkbox-custom {
+    box-shadow: 0 0 0 rem-calc(3) rgba($color-purple, 0.3);
+  }
+
+  .oxm-checkbox-input:checked + .oxm-checkbox-custom {
+    border-color: $color-purple;
+    background: $color-purple;
+
+    .oxm-checkbox-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .oxm-checkbox-label {
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  &--purple {
+    .oxm-checkbox-input:focus + .oxm-checkbox-custom {
+      box-shadow: 0 0 0 rem-calc(3) rgba($color-purple, 0.3);
+    }
+
+    .oxm-checkbox-input:checked + .oxm-checkbox-custom {
+      border-color: $color-purple;
+      background: $color-purple;
+    }
+
+    &:hover .oxm-checkbox-custom {
+      border-color: rgba($color-purple, 0.6);
+    }
+  }
+
+  &--blue {
+    .oxm-checkbox-input:focus + .oxm-checkbox-custom {
+      box-shadow: 0 0 0 rem-calc(3) rgba($color-blue, 0.3);
+    }
+
+    .oxm-checkbox-input:checked + .oxm-checkbox-custom {
+      border-color: $color-blue;
+      background: $color-blue;
+    }
+
+    &:hover .oxm-checkbox-custom {
+      border-color: rgba($color-blue, 0.6);
+    }
+  }
+
+  &--small {
+    font-size: rem-calc(14);
+    gap: rem-calc(8);
+
+    .oxm-checkbox-custom {
+      width: rem-calc(16);
+      height: rem-calc(16);
+    }
+
+    .oxm-checkbox-icon {
+      width: rem-calc(12);
+      height: rem-calc(12);
+    }
+  }
+
+  &--medium {
+    font-size: rem-calc(16);
+    gap: rem-calc(12);
+
+    .oxm-checkbox-custom {
+      width: rem-calc(20);
+      height: rem-calc(20);
+    }
+
+    .oxm-checkbox-icon {
+      width: rem-calc(14);
+      height: rem-calc(14);
+    }
+  }
+
+  &--large {
+    font-size: rem-calc(18);
+    gap: rem-calc(16);
+
+    .oxm-checkbox-custom {
+      width: rem-calc(24);
+      height: rem-calc(24);
+    }
+
+    .oxm-checkbox-icon {
+      width: rem-calc(16);
+      height: rem-calc(16);
+    }
+  }
+
+  &--error {
+    .oxm-checkbox-custom {
+      border-color: $color-error;
+    }
+
+    .oxm-checkbox-input:checked + .oxm-checkbox-custom {
+      border-color: $color-error;
+      background: $color-error;
+    }
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    .oxm-checkbox-custom {
+      border-color: rgba($color-white, 0.2);
+      background: rgba($color-gray, 0.1);
+    }
+
+    &:hover .oxm-checkbox-custom {
+      border-color: rgba($color-white, 0.2);
+      background: rgba($color-gray, 0.1);
+    }
+  }
+}
+
+.oxm-checkbox-error-message {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: rem-calc(4);
+  color: $color-error;
+  font-size: rem-calc(12);
+  font-weight: 400;
+  line-height: 1.4;
+} 

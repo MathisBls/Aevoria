@@ -37,6 +37,19 @@ $radius-lg: 0.75rem; // 12px
 // Transitions
 $transition: all 0.2s ease-in-out;
 
+// Fix legacy variables for components
+$color-purple: #7f38cc;
+$color-blue: #0d6efd;
+$color-error: #ef4444;
+$color-white: #fff;
+$color-gray: #888;
+$outline-hover: #f9fafb;
+
+// rem-calc for style consistency
+@function rem-calc($size) {
+  @return ($size / 16) * 1rem;
+}
+
 * {
   box-sizing: border-box;
 }

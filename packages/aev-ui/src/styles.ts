@@ -1,5 +1,5 @@
 // Export global styles
-import './global.scss'
+import '../src/styles/global.scss'
 
 
 

@@ -1,4 +1,4 @@
-@use '../../global.scss' as *;
+@import "../../styles/global.scss";
 
 .aev-button {
   font-weight: 500;
@@ -25,7 +25,7 @@
   // Variants
   &--primary {
     background-color: $blue;
-    color: $text-white;
+    color: $text-primary;
 
     &:hover:not(:disabled) {
       background-color: $blue-hover;
@@ -38,7 +38,7 @@
 
   &--secondary {
     background-color: $secondary;
-    color: $text-white;
+    color: $text-primary;
 
     &:hover:not(:disabled) {
       background-color: $secondary-hover;
